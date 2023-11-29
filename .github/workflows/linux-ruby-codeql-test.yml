@@ -1,0 +1,21 @@
+name: Ruby CodeQL Test
+
+on:
+  workflow_dispatch:
+  push:
+  pull_request:
+
+jobs:
+  ruby-codeql-test:
+    name: Ruby CodeQL Test
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Test
+        run: |
+          OUT=$(mktemp -d)
+          DB=$(mktemp -d)
+          LANG="ruby"
+          /opt/hostedtoolcache/CodeQL/*/x64/codeql/codeql database create -l $LANG -s $(pwd) $DB
+          /opt/hostedtoolcache/CodeQL/*/x64/codeql/codeql database analyze $DB --format=csv --output=$OUT/$LANG
