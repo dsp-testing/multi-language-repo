@@ -15,6 +15,19 @@ jobs:
       - uses: swift-actions/setup-swift@v1
         with:
           swift-version: "5.8.1"
+      - name: Get the worker process PID
+        id: runner-pid
+        run: |
+          WORKER_PID="$(ps aux | grep "Runner.Worker" | tr -s ' ' | cut -f2 -d ' ' | head -n1)"
+          echo "Runner PID: $WORKER_PID"
+          echo "runnerPid=$WORKER_PID" >> $GITHUB_OUTPUT
+      - name: Attach strace to worker process
+        if: runner.os == 'Linux'
+        env:
+          WORKER_PID: ${{ steps.runner-pid.outputs.runnerPid }}
+        run: |
+          echo "Runner PID: $WORKER_PID"
+          exec nohup sudo strace -f -e trace=open,openat -o ./tracer.log -p $WORKER_PID &
       - name: Test
         run: |
           OUT=$(mktemp -d)
@@ -26,3 +39,8 @@ jobs:
           . $CDB/temp/tracingEnvironment/end-tracing.sh
           /opt/hostedtoolcache/CodeQL/*/x64/codeql/codeql database finalize --db-cluster $CDB -vvv
           /opt/hostedtoolcache/CodeQL/*/x64/codeql/codeql database analyze $CDB/$LANG --format=csv --output=$OUT/$LANG
+      - name: Show tracer results
+        run: |
+          echo "Tracer results:"
+          ls -la ./tracer.log
+          sudo cat ./tracer.log | grep '/tmp/test' | grep 'open' | cut -d "\"" -f2 | sort -u
