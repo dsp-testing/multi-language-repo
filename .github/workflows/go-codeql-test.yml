@@ -1,4 +1,4 @@
-name: CPP CodeQL Test
+name: Go CodeQL Test
 
 on:
   workflow_dispatch:
@@ -6,8 +6,8 @@ on:
   pull_request:
 
 jobs:
-  cpp-codeql-test:
-    name: CPP CodeQL Test
+  go-codeql-test:
+    name: Go CodeQL Test
     runs-on: ubuntu-20.04
     steps:
       - name: Checkout
