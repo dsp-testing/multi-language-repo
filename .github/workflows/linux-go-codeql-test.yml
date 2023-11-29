@@ -17,9 +17,9 @@ jobs:
           OUT=$(mktemp -d)
           CDB=$(mktemp -d)
           LANG="go"
-          /opt/hostedtoolcache/CodeQL/2.15.2/x64/codeql/codeql database init --db-cluster -l $LANG -s $(pwd) --begin-tracing $CDB
+          /opt/hostedtoolcache/CodeQL/*/x64/codeql/codeql database init --db-cluster -l $LANG -s $(pwd) --begin-tracing $CDB
           . $CDB/temp/tracingEnvironment/start-tracing.sh
           ./build-$LANG.sh
           . $CDB/temp/tracingEnvironment/end-tracing.sh
-          /opt/hostedtoolcache/CodeQL/2.15.2/x64/codeql/codeql database finalize --db-cluster $CDB -vvv
-          /opt/hostedtoolcache/CodeQL/2.15.2/x64/codeql/codeql database analyze $CDB/$LANG --format=csv --output=$OUT/$LANG
+          /opt/hostedtoolcache/CodeQL/*/x64/codeql/codeql database finalize --db-cluster $CDB -vvv
+          /opt/hostedtoolcache/CodeQL/*/x64/codeql/codeql database analyze $CDB/$LANG --format=csv --output=$OUT/$LANG
