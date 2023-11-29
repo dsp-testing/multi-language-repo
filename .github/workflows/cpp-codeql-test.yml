@@ -1,0 +1,25 @@
+name: CPP CodeQL Test
+
+on:
+  workflow_dispatch:
+  push:
+  pull_request:
+
+jobs:
+  cpp-codeql-test:
+    name: CPP CodeQL Test
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Test
+        run: |
+          OUT=$(mktemp -d)
+          CDB=$(mktemp -d)
+          LANG="cpp"
+          /opt/hostedtoolcache/CodeQL/2.15.2/x64/codeql/codeql database init --db-cluster -l $LANG -s $(pwd) --begin-tracing $CDB
+          . $CDB/temp/tracingEnvironment/start-tracing.sh
+          ./build-$LANG.sh
+          . $CDB/temp/tracingEnvironment/end-tracing.sh
+          /opt/hostedtoolcache/CodeQL/2.15.2/x64/codeql/codeql database finalize --db-cluster $CDB -vvv
+          /opt/hostedtoolcache/CodeQL/2.15.2/x64/codeql/codeql database analyze $CDB/$LANG --format=csv --output=$OUT/$LANG
