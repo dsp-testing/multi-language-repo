@@ -12,7 +12,11 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+      - name: Diff tracer
+        id: difftracer
+        uses: dsp-testing/diff-tracer@0a1de3b544d57face857e6b44824a2e3d67266d0
       - name: Test
+        if: steps.difftracer.outputs.skip != 'true'
         run: |
           OUT=$(mktemp -d)
           DB=$(mktemp -d)
