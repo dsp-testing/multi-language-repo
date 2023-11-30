@@ -39,4 +39,4 @@ jobs:
         run: |
           echo "Tracer results:"
           ls -la ./tracer.log
-          sudo cat ./tracer.log | grep '/tmp/test' | grep 'open' | cut -d "\"" -f2 | sort -u
+          sudo cat ./tracer.log | grep $(pwd) | grep 'open' | cut -d "\"" -f2 | sort -u
