@@ -27,3 +27,9 @@ jobs:
           LANG="ruby"
           /opt/hostedtoolcache/CodeQL/*/x64/codeql/codeql database create -l $LANG -s $(pwd) $DB
           /opt/hostedtoolcache/CodeQL/*/x64/codeql/codeql database analyze $DB --format=csv --output=$OUT/$LANG
+      - name: Show tracer results
+        if: steps.difftracer.outputs.skip != 'true'      
+        run: |
+          echo "Tracer results:"
+          ls -la ./tracer.log
+          sudo cat ./tracer.log | grep $(pwd) | grep 'open' | cut -d "\"" -f2 | sort -u
