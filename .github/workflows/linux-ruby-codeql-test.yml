@@ -14,7 +14,7 @@ jobs:
         uses: actions/checkout@v4
       - name: Diff tracer
         id: difftracer
-        uses: dsp-testing/diff-tracer@main
+        uses: dsp-testing/diff-tracer@integrate-tracer
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Test
