@@ -10,7 +10,7 @@ on:
 jobs:
   cpp-codeql-test:
     name: CPP CodeQL Test
-    runs-on: macos-tracer
+    runs-on: ubuntu-20.04
     steps:
       - name: Checkout
         uses: actions/checkout@v4
