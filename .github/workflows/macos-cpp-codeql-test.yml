@@ -7,22 +7,19 @@ on:
       - main
   pull_request:
 
-env:
-  LANG: cpp
-
 jobs:
-  cpp-codeql-test:
-    name: $LANG CodeQL Test
+  lang-codeql-test:
+    name: CodeQL Lang Test
     runs-on: macos-tracer
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      - name: Init CodeQL for $LANG
+      - name: Init CodeQL
         uses: github/codeql-action/init@v2
         with:
-          languages: $LANG
-      - name: Test
+          languages: cpp
+      - name: Build
         run: |
-          ./build-$LANG.sh
+          ./build-cpp.sh
       - name: Perform CodeQL Analysis
         uses: github/codeql-action/analyze@v2
