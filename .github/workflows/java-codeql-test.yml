@@ -1,4 +1,4 @@
-name: Javascript CodeQL Test
+name: Java CodeQL Test
 
 on:
   workflow_dispatch:
@@ -8,8 +8,8 @@ on:
   pull_request:
 
 jobs:
-  javascript-codeql-test:
-    name: Javascript CodeQL Test
+  java-codeql-test:
+    name: CodeQL Java Test
     strategy:
       matrix:
         os: [ubuntu-latest, windows-latest, macos-latest]

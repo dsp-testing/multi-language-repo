@@ -1,4 +1,4 @@
-name: CPP CodeQL Test
+name: Linux Go CodeQL Test
 
 on:
   workflow_dispatch:
@@ -8,8 +8,8 @@ on:
   pull_request:
 
 jobs:
-  cpp-codeql-test:
-    name: CPP CodeQL Test
+  go-codeql-test:
+    name: Go CodeQL Test
     runs-on: ubuntu-20.04
     steps:
       - name: Checkout
@@ -18,7 +18,7 @@ jobs:
         run: |
           OUT=$(mktemp -d)
           CDB=$(mktemp -d)
-          LANG="cpp"
+          LANG="go"
           /opt/hostedtoolcache/CodeQL/*/x64/codeql/codeql database init --db-cluster -l $LANG -s $(pwd) --begin-tracing $CDB
           . $CDB/temp/tracingEnvironment/start-tracing.sh
           ./build-$LANG.sh

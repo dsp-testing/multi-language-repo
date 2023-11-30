@@ -1,4 +1,4 @@
-name: Javascript CodeQL Test
+name: Csharp CodeQL Test
 
 on:
   workflow_dispatch:
@@ -8,8 +8,8 @@ on:
   pull_request:
 
 jobs:
-  javascript-codeql-test:
-    name: Javascript CodeQL Test
+  csharp-codeql-test:
+    name: CodeQL Csharp Test
     strategy:
       matrix:
         os: [ubuntu-latest, windows-latest, macos-latest]
