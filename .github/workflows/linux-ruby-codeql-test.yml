@@ -31,6 +31,6 @@ jobs:
         if: steps.difftracer.outputs.skip != 'true'      
         run: |
           echo "Tracer results:"
-          ls -la ./tracer.log
-          sudo cat ./tracer.log
-          sudo cat ./tracer.log | grep $(pwd) | grep 'open' | cut -d "\"" -f2 | sort -u
+          ls -la ././tracer.log
+          sudo cat ./././tracer.log
+          sudo cat ././././tracer.log | grep $(pwd) | grep 'open' | cut -d "\"" -f2 | sort -u
