@@ -1,4 +1,4 @@
-name: Javascript CodeQL Test
+name: CPP CodeQL Test
 
 on:
   workflow_dispatch:
@@ -8,11 +8,11 @@ on:
   pull_request:
 
 jobs:
-  javascript-codeql-test:
-    name: Javascript CodeQL Test
+  cpp-codeql-test:
+    name: CodeQL CPP Test
     strategy:
       matrix:
-        os: [ubuntu-latest, windows-latest, macos-latest]
+        os: [ubuntu-latest, windows-latest, macos-tracer]
     runs-on: ${{ matrix.os }}
     steps:
       - name: Checkout
@@ -20,10 +20,10 @@ jobs:
       - name: Init CodeQL
         uses: github/codeql-action/init@v2
         with:
-          languages: csharp
+          languages: cpp
       - name: Build
         shell: bash
         run: |
-          ./build-csharp.sh
+          ./build-cpp.sh
       - name: Perform CodeQL Analysis
         uses: github/codeql-action/analyze@v2
