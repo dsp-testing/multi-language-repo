@@ -1,0 +1,23 @@
+name: CPP CodeQL Test
+
+on:
+  workflow_dispatch:
+  push:
+  pull_request:
+
+env:
+  LANG: cpp
+
+jobs:
+  cpp-codeql-test:
+    name: $LANG CodeQL Test
+    runs-on: macos-tracer
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - uses: github/codeql-action/init@v2
+        with:
+          languages: $LANG
+      - name: Test
+        run: |
+          ./build-$LANG.sh
