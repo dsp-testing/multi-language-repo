@@ -7,6 +7,9 @@ on:
       - main
   pull_request:
 
+env:
+  CODEQL_ACTION_EXTRA_OPTIONS: '{"database":{"init":["--no-calculate-baseline"]}}'
+
 jobs:
   ruby-codeql-test:
     name: Ruby CodeQL Test
