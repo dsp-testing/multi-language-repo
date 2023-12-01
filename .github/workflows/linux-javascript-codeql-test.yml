@@ -10,20 +10,17 @@ on:
 jobs:
   javascript-codeql-test:
     name: Javascript CodeQL Test
-    strategy:
-      matrix:
-        os: [ubuntu-latest, windows-latest, macos-latest]
-    runs-on: ${{ matrix.os }}
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v4
       - name: Init CodeQL
         uses: github/codeql-action/init@v2
         with:
-          languages: csharp
+          languages: javascript
       - name: Build
         shell: bash
         run: |
-          ./build-csharp.sh
+          ./build-javascript.sh
       - name: Perform CodeQL Analysis
         uses: github/codeql-action/analyze@v2

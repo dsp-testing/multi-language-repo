@@ -10,10 +10,7 @@ on:
 jobs:
   swift-codeql-test:
     name: Swift CodeQL Test
-    strategy:
-      matrix:
-        os: [ubuntu-latest, macos-latest]
-    runs-on: ${{ matrix.os }}
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -23,10 +20,10 @@ jobs:
       - name: Init CodeQL
         uses: github/codeql-action/init@v2
         with:
-          languages: csharp
+          languages: swift
       - name: Build
         shell: bash
         run: |
-          ./build-csharp.sh
+          ./build-swift.sh
       - name: Perform CodeQL Analysis
         uses: github/codeql-action/analyze@v2

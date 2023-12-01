@@ -10,10 +10,7 @@ on:
 jobs:
   csharp-codeql-test:
     name: CodeQL Csharp Test
-    strategy:
-      matrix:
-        os: [ubuntu-latest, windows-latest, macos-latest]
-    runs-on: ${{ matrix.os }}
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v4
