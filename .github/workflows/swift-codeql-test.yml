@@ -17,14 +17,15 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      - uses: swift-actions/setup-swift@v1
-        with:
-          swift-version: "5.8.1"
       - name: Diff tracer
         id: difftracer
         uses: dsp-testing/diff-tracer@main
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - uses: swift-actions/setup-swift@v1
+        if: steps.difftracer.outputs.skip != 'true'
+        with:
+          swift-version: "5.8.1"
       - name: Init CodeQL
         if: steps.difftracer.outputs.skip != 'true'
         uses: github/codeql-action/init@v2
