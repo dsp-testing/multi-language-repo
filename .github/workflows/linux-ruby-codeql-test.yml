@@ -16,7 +16,7 @@ jobs:
         uses: actions/checkout@v4
       - name: Diff tracer
         id: difftracer
-        uses: dsp-testing/diff-tracer@883a95564109e8e2e83aed26bb7ca8fd27a379a0
+        uses: dsp-testing/diff-tracer@7d2b806ef53cd061379a4e987e844506f68f7993
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Test PID in the workflow
