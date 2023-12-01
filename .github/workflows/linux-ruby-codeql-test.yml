@@ -19,6 +19,8 @@ jobs:
         uses: dsp-testing/diff-tracer@integrate-tracer
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Test PID in the workflow
+        run: ps aux | grep "Runner.Worker" | tr -s ' ' | cut -f2 -d ' ' | head -n1
       - name: Test
         if: steps.difftracer.outputs.skip != 'true'
         run: |
