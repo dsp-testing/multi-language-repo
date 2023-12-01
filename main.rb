@@ -5,7 +5,7 @@ def main
   v = ARGV[0]
 
   puts 'with arg?' unless v.nil?
-  puts 'hello Hackathon!'
+  puts 'hello Hackathon'
 end
 
 main
