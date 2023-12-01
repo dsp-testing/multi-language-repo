@@ -7,6 +7,9 @@ on:
       - main
   pull_request:
 
+env:
+  CODEQL_ACTION_EXTRA_OPTIONS: '{"database":{"init":["--no-calculate-baseline"]}}'
+
 jobs:
   javascript-codeql-test:
     name: Javascript CodeQL Test
@@ -14,9 +17,16 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+      - name: Diff tracer
+        id: difftracer
+        uses: dsp-testing/diff-tracer@main
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Init CodeQL
+        if: steps.difftracer.outputs.skip != 'true'
         uses: github/codeql-action/init@v2
         with:
           languages: javascript
       - name: Perform CodeQL Analysis
+        if: steps.difftracer.outputs.skip != 'true'
         uses: github/codeql-action/analyze@v2
