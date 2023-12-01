@@ -18,9 +18,5 @@ jobs:
         uses: github/codeql-action/init@v2
         with:
           languages: javascript
-      - name: Build
-        shell: bash
-        run: |
-          ./build-javascript.sh
       - name: Perform CodeQL Analysis
         uses: github/codeql-action/analyze@v2

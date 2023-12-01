@@ -1,4 +1,4 @@
-name: Ruby CodeQL Test
+name: Python CodeQL Test
 
 on:
   workflow_dispatch:
@@ -8,8 +8,8 @@ on:
   pull_request:
 
 jobs:
-  ruby-codeql-test:
-    name: Ruby CodeQL Test
+  python-codeql-test:
+    name: Python CodeQL Test
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -17,10 +17,6 @@ jobs:
       - name: Init CodeQL
         uses: github/codeql-action/init@v2
         with:
-          languages: ruby
-      - name: Build
-        shell: bash
-        run: |
-          ./build-ruby.sh
+          languages: python
       - name: Perform CodeQL Analysis
         uses: github/codeql-action/analyze@v2
