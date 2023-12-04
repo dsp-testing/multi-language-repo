@@ -2,7 +2,7 @@
 
 int main(int argc, char **argv) {
     if (1) {
-        printf("Hello, Hackathon!\n");
+        printf("Hello, another test!\n");
     }
 }
 
